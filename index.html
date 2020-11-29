@@ -1,0 +1,278 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>Luca Luke</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <!-- JavaScript and dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+    crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: black;
+    }
+
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    main,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+      margin: 0px;
+      padding: 0px;
+      border: 0px;
+      font: inherit;
+      vertical-align: baseline;
+    }
+
+    .vertical-center {
+      min-height: 100%;
+      /* Fallback for browsers do NOT support vh unit */
+      min-height: 100vh;
+      /* These two lines are counted as one :-)       */
+
+      display: flex;
+      align-items: center;
+    }
+
+    .button {
+      position: relative;
+      height: auto;
+      transition: box-shadow 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, border-color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, transform 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, background-color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 2px dotted rgb(0, 255, 0);
+      background-color: transparent;
+      color: rgb(0, 255, 0);
+      border-radius: 0px;
+    }
+
+    .button-blue {
+      color: rgb(41, 97, 218);
+      border: 2px dotted rgb(41, 97, 218);
+    }
+
+    .button-red {
+      color: rgb(218, 41, 41);
+      border: 2px dotted rgb(218, 41, 41);
+    }
+
+    .button-orange {
+      color: rgb(206, 117, 35);
+      border: 2px dotted rgb(206, 117, 35);
+    }
+
+    .button-yellow {
+      color: rgb(203, 206, 35);
+      border: 2px dotted rgb(203, 206, 35);
+    }
+
+    .button-purple {
+      color: rgb(186, 35, 206);
+      border: 2px dotted rgb(186, 35, 206);
+    }
+
+    .buttonTextPadding {
+      padding: 0px;
+      line-height: 1.5;
+      width: 100%;
+    }
+
+    .buttonContent {
+      border: none;
+      display: inline-flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      height: auto;
+      position: relative;
+      padding: 16px 20px;
+      margin: 0px;
+      font-family: "Gill Sans", sans-serif;
+      font-weight: inherit;
+      font-size: inherit;
+      width: 100%;
+      cursor: pointer;
+      appearance: none;
+      text-align: center;
+      box-sizing: border-box;
+      text-decoration: none;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      white-space: normal;
+      background: none;
+      color: inherit;
+      transition: box-shadow 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, border-color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, transform 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s, background-color 0.25s cubic-bezier(0.08, 0.59, 0.29, 0.99) 0s;
+    }
+    a:hover {
+      color: white;
+      font-weight: 800;
+    }
+    .buttonText {
+      text-transform: uppercase
+    }
+    .bio-container {
+      color: white;
+      text-align: center;
+      font-size: larger;
+      padding-top: 2rem;
+      padding-bottom: 4rem;
+    }
+    .header {
+      color: wheat;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="jumbotron vertical-center">
+    <!-- 
+    ^--- Added class  -->
+    <div class="container">
+      <div class="bio-container">
+        🏳️‍🌈🖖 Antifa hacktivist, prepper, GNU/Linux user, avid Tex Willer reader and unrepentant whovian.
+      </div>
+      <div class="">
+        <!-- mastodon -->
+        <div class="button button-red">
+          <a href="https://nebbia.fail/@lucaluke88"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">mastodon profile</p>
+          </a>
+        </div>
+        <!-- lemmy -->
+        <div class="button button-orange">
+          <a href="https://lemmy.ml/u/lucaluke"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">lemmy profile</p>
+          </a>
+        </div>
+        <!-- lemmy -->
+        <div class="button button-yellow">
+          <a href="https://pixelfed.social/lucaluke"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">pixelfed profile</p>
+          </a>
+        </div>
+        <!-- lemmy -->
+        <div class="button">
+          <a href="https://www.linkedin.com/in/lucacostantino"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">linkedin profile</p>
+          </a>
+        </div>
+        <!-- lemmy -->
+        <div class="button button-blue">
+          <a href="https://www.emergency.it"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">Sostieni Emergency</p>
+          </a>
+        </div>
+        <!-- lemmy -->
+        <div class="button button-purple">
+          <a href="https://www.fsf.org/"
+            target="_blank" display="inline-flex"
+            font-family="inherit" font-weight="inherit" font-size="inherit" height="auto"
+            class="buttonContent">
+            <p class="buttonText buttonTextPadding">Free Software Foundation</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
