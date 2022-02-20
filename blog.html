@@ -30,7 +30,7 @@
           </span>
         </label>
 
-        <div class="trigger"><a class="page-link" href="/typescript/2022-02-20-implementazione-nativa-lodash-pick.html">Implementazione nativa di Pick di lodash</a><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog.html">Blog</a></div>
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog.html">Blog</a></div>
       </nav></div>
 </header>
 <main class="page-content" aria-label="Content">
@@ -77,6 +77,16 @@ Voglio quindi, approfittarne per uscire dalla mia comfort zone e vedere se con l
 <ul>
   <li>Sir Tim Berners-Lee, inventor of the World Wide Web</li>
 </ul>
+
+    </li>
+  
+    <li>
+      <h2><a href="/typescript/2021/09/05/implementazione-nativa-lodash-pick.html">Implementazione nativa di Pick di lodash</a></h2>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export const pick = &lt;T, K extends keyof T&gt;(o: T, propertyNames: K[]) =&gt;
+    Object.fromEntries(
+      Object.entries(o).filter(([key]) =&gt; (propertyNames as string[]).includes(key))
+    ) as Pick&lt;T, K&gt;;
+</code></pre></div></div>
 
     </li>
   
