@@ -7,8 +7,8 @@
 <meta name="generator" content="Jekyll v4.2.0" />
 <meta property="og:title" content="Implementazione nativa di Pick di lodash" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità" />
-<meta property="og:description" content="post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità" />
+<meta name="description" content="post aggiornato il 24 aprile 2022 con un’implementazione più decente." />
+<meta property="og:description" content="post aggiornato il 24 aprile 2022 con un’implementazione più decente." />
 <link rel="canonical" href="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html" />
 <meta property="og:url" content="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html" />
 <meta property="og:site_name" content="My wonderful personal site lcst" />
@@ -17,7 +17,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Implementazione nativa di Pick di lodash" />
 <script type="application/ld+json">
-{"url":"/typescript/2022/02/20/implementazione-nativa-lodash-pick.html","headline":"Implementazione nativa di Pick di lodash","dateModified":"2022-02-20T13:07:23+01:00","datePublished":"2022-02-20T13:07:23+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"/typescript/2022/02/20/implementazione-nativa-lodash-pick.html"},"description":"post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità","@type":"BlogPosting","@context":"https://schema.org"}</script>
+{"url":"/typescript/2022/02/20/implementazione-nativa-lodash-pick.html","headline":"Implementazione nativa di Pick di lodash","dateModified":"2022-02-20T13:07:23+01:00","datePublished":"2022-02-20T13:07:23+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"/typescript/2022/02/20/implementazione-nativa-lodash-pick.html"},"description":"post aggiornato il 24 aprile 2022 con un’implementazione più decente.","@type":"BlogPosting","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="My wonderful personal site | lcst" /></head>
 <body><header class="site-header" role="banner">
@@ -47,15 +47,51 @@
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p><em>post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità</em></p>
+    <p><em>post aggiornato il 24 aprile 2022 con un’implementazione più decente.</em></p>
+
+<p>Versione di base:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+   * Pick one or multiple fields from an object
+   * @param src
+   * @param fields
+   */
+  function pick&lt;T, F extends keyof T&gt;(src: T, fields: F): T[F];
+  function pick&lt;T, F extends keyof T&gt;(
+    src: T,
+    fields: F[]
+  ): {
+    [K in F]: T[K];
+  };
+  function pick&lt;T, F extends keyof T&gt;(
+    src: T,
+    fields: F[] | F
+  ):
+    | {
+        [K in F]: T[K];
+      }
+    | T[F] {
+    if (Array.isArray(fields)) {
+      const output: Partial&lt;T&gt; = {};
+      fields.map(field =&gt; {
+        output[field] = src[field];
+      });
+      return output as {
+        [K in F]: T[K];
+      };
+    } else return src[fields];
+  }
+</code></pre></div></div>
+
+<p>Versione per array di oggetti:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  /**
    * Pick one or multiple fields from array of objects
    * @param src
    * @param fields
    */
-  static pick&lt;T, F extends keyof T&gt;(src: Array&lt;T&gt;, fields: F): T[F][];
-  static pick&lt;T, F extends keyof T&gt;(
+  function pick&lt;T, F extends keyof T&gt;(src: Array&lt;T&gt;, fields: F): T[F][];
+  function pick&lt;T, F extends keyof T&gt;(
     src: Array&lt;T&gt;,
     fields: F[]
   ): Array&lt;
@@ -63,7 +99,7 @@
       [K in F]: T[K];
     }
   &gt;;
-  static pick&lt;T, F extends keyof T&gt;(
+  function pick&lt;T, F extends keyof T&gt;(
     src: Array&lt;T&gt;,
     fields: F[] | F
   ):

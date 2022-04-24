@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-04-24T20:15:51+02:00</updated><id>/feed.xml</id><title type="html">My wonderful personal site | lcst</title><subtitle>Dreaming of unicorns under a cyberpunk sky.</subtitle><entry><title type="html">Selezione multipla di email su iOS</title><link href="/mac/os/2022/04/24/selezione-multipla-email-ios.html" rel="alternate" type="text/html" title="Selezione multipla di email su iOS" /><published>2022-04-24T20:12:00+02:00</published><updated>2022-04-24T20:12:00+02:00</updated><id>/mac/os/2022/04/24/selezione-multipla-email-ios</id><content type="html" xml:base="/mac/os/2022/04/24/selezione-multipla-email-ios.html">&lt;p&gt;Ho appena scoperto che per selezionare più email alla volta sull’applicazione di default delle mail di iOS, mi basta trascinare giù con due dita.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-04-24T20:19:19+02:00</updated><id>/feed.xml</id><title type="html">My wonderful personal site | lcst</title><subtitle>Dreaming of unicorns under a cyberpunk sky.</subtitle><entry><title type="html">Selezione multipla di email su iOS</title><link href="/mac/os/2022/04/24/selezione-multipla-email-ios.html" rel="alternate" type="text/html" title="Selezione multipla di email su iOS" /><published>2022-04-24T20:12:00+02:00</published><updated>2022-04-24T20:12:00+02:00</updated><id>/mac/os/2022/04/24/selezione-multipla-email-ios</id><content type="html" xml:base="/mac/os/2022/04/24/selezione-multipla-email-ios.html">&lt;p&gt;Ho appena scoperto che per selezionare più email alla volta sull’applicazione di default delle mail di iOS, mi basta trascinare giù con due dita.&lt;/p&gt;
 
 &lt;p&gt;Una volta che lo sai è comodo, ma un ‘select all’ secondo me dovrebbe essere una funzione messa in evidenza, non un trick che devo scoprire io leggendomi diverse guide su Internet ¯_(ツ)_/¯&lt;/p&gt;
 
@@ -6,15 +6,51 @@
 
 &lt;p&gt;PS. Al diavolo Epic e il suo totale disinteresse per gli utenti MAC OS!&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;lcst&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="mac" /><category term="os" /><summary type="html">Se usate Epic Games Launcher su Mac OS e avete un crash all’avvio, potete risolvere il problema andando nelle impostazioni del MAC -&amp;gt; Batteria e levare la spunta sul toggle di selezione automatica della scheda grafica.</summary></entry><entry><title type="html">Implementazione nativa di Pick di lodash</title><link href="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html" rel="alternate" type="text/html" title="Implementazione nativa di Pick di lodash" /><published>2022-02-20T13:07:23+01:00</published><updated>2022-02-20T13:07:23+01:00</updated><id>/typescript/2022/02/20/implementazione-nativa-lodash-pick</id><content type="html" xml:base="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html">&lt;p&gt;&lt;em&gt;post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;lcst&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="mac" /><category term="os" /><summary type="html">Se usate Epic Games Launcher su Mac OS e avete un crash all’avvio, potete risolvere il problema andando nelle impostazioni del MAC -&amp;gt; Batteria e levare la spunta sul toggle di selezione automatica della scheda grafica.</summary></entry><entry><title type="html">Implementazione nativa di Pick di lodash</title><link href="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html" rel="alternate" type="text/html" title="Implementazione nativa di Pick di lodash" /><published>2022-02-20T13:07:23+01:00</published><updated>2022-02-20T13:07:23+01:00</updated><id>/typescript/2022/02/20/implementazione-nativa-lodash-pick</id><content type="html" xml:base="/typescript/2022/02/20/implementazione-nativa-lodash-pick.html">&lt;p&gt;&lt;em&gt;post aggiornato il 24 aprile 2022 con un’implementazione più decente.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Versione di base:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+   * Pick one or multiple fields from an object
+   * @param src
+   * @param fields
+   */
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(src: T, fields: F): T[F];
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(
+    src: T,
+    fields: F[]
+  ): {
+    [K in F]: T[K];
+  };
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(
+    src: T,
+    fields: F[] | F
+  ):
+    | {
+        [K in F]: T[K];
+      }
+    | T[F] {
+    if (Array.isArray(fields)) {
+      const output: Partial&amp;lt;T&amp;gt; = {};
+      fields.map(field =&amp;gt; {
+        output[field] = src[field];
+      });
+      return output as {
+        [K in F]: T[K];
+      };
+    } else return src[fields];
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Versione per array di oggetti:&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  /**
    * Pick one or multiple fields from array of objects
    * @param src
    * @param fields
    */
-  static pick&amp;lt;T, F extends keyof T&amp;gt;(src: Array&amp;lt;T&amp;gt;, fields: F): T[F][];
-  static pick&amp;lt;T, F extends keyof T&amp;gt;(
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(src: Array&amp;lt;T&amp;gt;, fields: F): T[F][];
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(
     src: Array&amp;lt;T&amp;gt;,
     fields: F[]
   ): Array&amp;lt;
@@ -22,7 +58,7 @@
       [K in F]: T[K];
     }
   &amp;gt;;
-  static pick&amp;lt;T, F extends keyof T&amp;gt;(
+  function pick&amp;lt;T, F extends keyof T&amp;gt;(
     src: Array&amp;lt;T&amp;gt;,
     fields: F[] | F
   ):
@@ -44,7 +80,7 @@
   }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;em&gt;lcst&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="typescript" /><summary type="html">post aggiornato il 24 aprile 2022 con un’implementazione più decente. Questa funzione è pensata per essere contenuta in una classe di utilità</summary></entry><entry><title type="html">Impressioni su alternative a Ubuntu Linux</title><link href="/linux/2022/02/13/alternative-a-ubuntu.html" rel="alternate" type="text/html" title="Impressioni su alternative a Ubuntu Linux" /><published>2022-02-13T16:00:00+01:00</published><updated>2022-02-13T16:00:00+01:00</updated><id>/linux/2022/02/13/alternative-a-ubuntu</id><content type="html" xml:base="/linux/2022/02/13/alternative-a-ubuntu.html">&lt;p&gt;Per chi non lo sapesse, sono uno storico utilizzatore di GNU/Linux ma, per un motivo o per l’altro, sono sempre caduto nell’ecosistema Debian o Ubuntu.
+&lt;p&gt;&lt;em&gt;lcst&lt;/em&gt;&lt;/p&gt;</content><author><name></name></author><category term="typescript" /><summary type="html">post aggiornato il 24 aprile 2022 con un’implementazione più decente.</summary></entry><entry><title type="html">Impressioni su alternative a Ubuntu Linux</title><link href="/linux/2022/02/13/alternative-a-ubuntu.html" rel="alternate" type="text/html" title="Impressioni su alternative a Ubuntu Linux" /><published>2022-02-13T16:00:00+01:00</published><updated>2022-02-13T16:00:00+01:00</updated><id>/linux/2022/02/13/alternative-a-ubuntu</id><content type="html" xml:base="/linux/2022/02/13/alternative-a-ubuntu.html">&lt;p&gt;Per chi non lo sapesse, sono uno storico utilizzatore di GNU/Linux ma, per un motivo o per l’altro, sono sempre caduto nell’ecosistema Debian o Ubuntu.
 Dato che ora il mio sistema principale è Mac OS (!!!), usare GNU/Linux è ormai divenuto per me un hobby o tutt’al più un uso molto specifico e contestualizzato.
 Voglio quindi, approfittarne per uscire dalla mia comfort zone e vedere se con l’ecosistema di Red Hat/Fedora mi trovo bene quanto con quello di Canonical/Ubuntu.&lt;/p&gt;
 
